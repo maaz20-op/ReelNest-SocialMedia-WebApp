@@ -84,8 +84,8 @@ a:hover {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  margin: var(--space-md);
+  padding: var(--space-md);
+  margin: var(--space-sm);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   display: grid;
   grid-template-rows: auto auto;
@@ -117,7 +117,7 @@ a:hover {
   top: 1rem;
   right: 1rem;
   color: var(--text-primary);
-  font-size: clamp(24px, 5vw, 32px);
+  font-size: clamp(20px, 5vw, 32px);
   z-index: 100;
   transition: transform var(--transition-fast);
   background: var(--bg-card);
@@ -138,8 +138,8 @@ a:hover {
 }
 
 .profile-pic {
-  width: clamp(100px, 25vw, 130px);
-  height: clamp(100px, 25vw, 130px);
+  width: clamp(80px, 20vw, 120px);
+  height: clamp(80px, 20vw, 120px);
   border-radius: var(--radius-full);
   border: 3px solid var(--accent-primary);
   object-fit: cover;
@@ -178,7 +178,7 @@ a:hover {
 
 /* Name & Username */
 .fullname {
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(1.2rem, 5vw, 2rem);
   font-weight: 700;
   text-align: center;
   margin: 0;
@@ -189,7 +189,7 @@ a:hover {
 }
 
 .username {
-  font-size: clamp(1rem, 3vw, 1.2rem);
+  font-size: clamp(0.85rem, 3vw, 1.2rem);
   color: var(--text-secondary);
   text-align: center;
   margin: 0;
@@ -198,12 +198,12 @@ a:hover {
 /* Followers/Following Container */
 .containerFollowers {
   display: flex;
-  gap: var(--space-lg);
+  gap: var(--space-md);
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 400px;
-  margin: var(--space-sm) 0;
+  flex-wrap: wrap;
+  margin: var(--space-xs) 0;
 }
 
 .followers,
@@ -212,11 +212,13 @@ a:hover {
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
-  padding: 2vw;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
   border-radius: var(--radius-md);
   background: var(--bg-card);
   transition: all var(--transition-fast);
   cursor: pointer;
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
+  min-width: 100px;
 }
 
 .followers:hover,
@@ -228,26 +230,26 @@ a:hover {
 
 .count1,
 .count2 {
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
   font-weight: 700;
   color: var(--accent-primary);
-  width: 100px;
-  margin-left: 74px;
+  width: auto;
+  margin-left: 0;
 }
 
 /* Bio Section */
 .containerBio {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  padding: var(--space-sm);
+  padding: var(--space-xs);
+  max-width: 95vw;
 }
 
 .bio {
-  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-size: clamp(0.8rem, 2vw, 1rem);
   color: var(--text-secondary);
   text-align: center;
-  line-height: 1.6;
+  line-height: 1.5;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -282,18 +284,17 @@ a:hover {
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
   margin-top: var(--space-md);
 }
 
 .create-post,
 .account-settings {
   flex: 1;
-  min-width: 150px;
-  padding: 1rem 1.5rem;
+  min-width: 140px;
+  padding: 0.75rem 1rem;
   border: none;
   border-radius: var(--radius-full);
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
   font-weight: 600;
   color: var(--text-primary);
   cursor: pointer;
@@ -1324,6 +1325,36 @@ overflow-y: scroll;
 
 /* Small Phones (480px+) */
 @media (min-width: 480px) {
+  .profile-header {
+    padding: var(--space-md);
+    margin: var(--space-md) auto;
+  }
+  
+  .profile-pic {
+    width: clamp(90px, 22vw, 110px);
+    height: clamp(90px, 22vw, 110px);
+  }
+  
+  .fullname {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+  
+  .containerFollowers {
+    gap: var(--space-md);
+  }
+  
+  .btn-action {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+  
+  .create-post,
+  .account-settings {
+    min-width: 145px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
   .masonry {
     column-count: 2;
   }
@@ -1340,9 +1371,9 @@ overflow-y: scroll;
 /* Tablets (768px+) */
 @media (min-width: 768px) {
   .profile-header {
-    padding: var(--space-xl);
+    padding: var(--space-lg);
     margin: var(--space-lg) auto;
-    max-width: 700px;
+    max-width: 95%;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto auto;
     justify-items: start;
@@ -1352,6 +1383,12 @@ overflow-y: scroll;
   .profileImage {
     grid-row: 1 / 4;
     grid-column: 1;
+    margin-bottom: 0;
+  }
+  
+  .profile-pic {
+    width: clamp(110px, 20vw, 140px);
+    height: clamp(110px, 20vw, 140px);
   }
   
   .fullname,
@@ -1359,35 +1396,49 @@ overflow-y: scroll;
     grid-column: 2;
     text-align: left;
     justify-self: start;
+    margin: var(--space-xs) 0;
+  }
+  
+  .fullname {
+    grid-row: 1;
+  }
+  
+  .username {
+    grid-row: 2;
   }
   
   .containerFollowers {
     grid-column: 1 / -1;
     justify-self: center;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
+    max-width: 500px;
+    margin: var(--space-md) 0;
+  }
+  
+  .followers,
+  .following {
+    padding: clamp(1rem, 2vw, 1.5rem);
+    min-width: 120px;
   }
   
   .containerBio {
     grid-column: 1 / -1;
     justify-self: center;
+    max-width: 700px;
   }
   
   .btn-action {
     grid-column: 1 / -1;
     justify-self: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    max-width: 600px;
+    gap: var(--space-md);
   }
   
-  .masonry {
-    column-count: 3;
-  }
-  
-  .video-container {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
-  }
-  
-  .upgraded-card {
-    max-width: 260px;
+  .create-post,
+  .account-settings {
+    min-width: 160px;
+    padding: 0.85rem 1.5rem;
   }
 }
 
