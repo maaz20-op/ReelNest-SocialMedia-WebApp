@@ -2,7 +2,7 @@ const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
 let dotenv = require("dotenv")
 dotenv.config();
 const mongoose = require("mongoose");
-
+console.log(process.env.MONGO_URI)
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ MongoDB Error:", err));
@@ -16,13 +16,18 @@ const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo'); 
+const { Server } = require("socket.io");
+const http   = require("http");
+const server = http.createServer(app);
 const userModel = require('./models/user-model');
 const helmet = require('helmet');
+const io  = new  Server(server);
 const userWatcherStreams = require("./changeStreams/userWatcher");
 const passport = require("passport");
 require('./config/googlePassport')
 const globalErrorHandler = require("./middlewares/globalErrorHandler")
 //  require message connections of sockets 
+
 const { ApolloServer } = require('@apollo/server'); 
 const { expressMiddleware } = require("@apollo/server/express4");
 const checkOrigin = require("./middlewares/securityMiddlewares");
@@ -31,7 +36,7 @@ const commentModel = require("./models/comment-model");
 require('./queues/emailQueue')
 
 //userWatcherStreams()
-
+//messageSocketsConnection(io);
 
 
 
@@ -137,7 +142,10 @@ app.use('/', require('./routes/web/index')); // use for web response, save fall 
 app.locals.moment = moment;
 
 
-
+app.get("/all", async function(req, res){
+ const user = await userModel.find();
+ res.json({user})
+})
  
 
 
@@ -147,8 +155,8 @@ app.locals.moment = moment;
 const PORT = process.env.PORT || 3000;
 
 
-app.listen(PORT, function () {
+server.listen(PORT, function () {
   console.log(`🚀 Server is running on port ${PORT}...`);
 });
 
-module.exports = app;
+module.exports = server;
