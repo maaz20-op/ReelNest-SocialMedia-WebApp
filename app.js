@@ -18,7 +18,6 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo'); 
 const userModel = require('./models/user-model');
 const helmet = require('helmet');
-const io  = new  Server(server);
 const userWatcherStreams = require("./changeStreams/userWatcher");
 const passport = require("passport");
 require('./config/googlePassport')
