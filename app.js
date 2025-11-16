@@ -16,9 +16,6 @@ const cookieParser = require('cookie-parser');
 const session = require("express-session");
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo'); 
-const { Server } = require("socket.io");
-const http   = require("http");
-const server = http.createServer(app);
 const userModel = require('./models/user-model');
 const helmet = require('helmet');
 const io  = new  Server(server);
@@ -141,10 +138,7 @@ app.use('/', require('./routes/web/index')); // use for web response, save fall 
 app.locals.moment = moment;
 
 
-app.get("/all", async function(req, res){
- const user = await userModel.find();
- res.json({user})
-})
+
  
 
 
@@ -154,11 +148,10 @@ app.get("/all", async function(req, res){
 const PORT = process.env.PORT || 3000;
 
 
-server.listen(PORT, function () {
+app.listen(PORT, function () {
   console.log(`🚀 Server is running on port ${PORT}...`);
 });
 
 module.exports = {
-  app,
-  server
+  app
 }
