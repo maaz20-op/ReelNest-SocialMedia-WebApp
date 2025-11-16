@@ -2,7 +2,7 @@ const envFile = `.env.${process.env.NODE_ENV || 'development'}`;
 let dotenv = require("dotenv")
 dotenv.config();
 const mongoose = require("mongoose");
-console.log(process.env.MONGO_URI)
+
 mongoose.connect(process.env.MONGO_URI)
 .then(() => console.log("✅ MongoDB Connected"))
   .catch((err) => console.log("❌ MongoDB Error:", err));
@@ -27,7 +27,6 @@ const passport = require("passport");
 require('./config/googlePassport')
 const globalErrorHandler = require("./middlewares/globalErrorHandler")
 //  require message connections of sockets 
-const messageSocketsConnection = require("./socket/message-sockets-connection");
 const { ApolloServer } = require('@apollo/server'); 
 const { expressMiddleware } = require("@apollo/server/express4");
 const checkOrigin = require("./middlewares/securityMiddlewares");
@@ -36,7 +35,7 @@ const commentModel = require("./models/comment-model");
 require('./queues/emailQueue')
 
 //userWatcherStreams()
-messageSocketsConnection(io);
+
 
 
 
