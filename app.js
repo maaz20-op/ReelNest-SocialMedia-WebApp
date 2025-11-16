@@ -35,10 +35,9 @@ const postModel = require("./models/post-model");
 const commentModel = require("./models/comment-model");
 require('./queues/emailQueue')
 
+const msgModel = require("./models/message-model")
 //userWatcherStreams()
 //messageSocketsConnection(io);
-
-
 
 
 // 📁 Public folder
@@ -112,9 +111,6 @@ app.use(helmet.contentSecurityPolicy({
 app.use(flash());
 
 //app.use(checkOrigin); //check is origin is trusted site e.g reelnest.com
-
-
-
 
 
 // 📢 Flash messages for EJS views
